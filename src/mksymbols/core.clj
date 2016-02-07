@@ -90,7 +90,9 @@
           symdir ((args :options) :symdir)]
         (if (or (nil? path)
                 (nil? symdir))
-            (printf "Please use correct -n and -s settings. Use -h to see help.\n")
+            (do
+                (println "Please use correct -n and -s settings. Use -h to see help.")
+                1)
             (do
                 (printf "Symbol store:  '%s'\n" symdir)
                 (printf "Entering path: '%s'\n" path)
@@ -100,10 +102,10 @@
     (let [args (parse-opts args cli-options)]
         (let [opts (args :options)]
             (if (true? (opts :help))
-                (do (println "Help:")
-                    (println "")
-                    (println (args :summary)))
-                (run-main args)))))
+                    (do (println "Help:")
+                        (println "")
+                        (println (args :summary))))
+                (run-main args))))
 
 (defn r [] (use 'mksymbols.core :reload))
 
